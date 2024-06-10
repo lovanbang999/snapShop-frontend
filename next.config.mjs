@@ -1,8 +1,9 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  future: {
-    webpack5: true
-  }
-}
 
-export default nextConfig
+import createNextIntlPlugin from 'next-intl/plugin'
+
+const withNextIntl = createNextIntlPlugin()
+
+const nextConfig = {}
+
+export default withNextIntl(nextConfig)
