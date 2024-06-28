@@ -3,6 +3,8 @@ import { Inter } from 'next/font/google'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
 import './globals.css'
+import AppProvider from '../AppProvider'
+import { cookies } from 'next/headers'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,12 +22,17 @@ export default async function RootLayout({
 }>) {
 
   const messages = await getMessages()
+  const cookieStore = cookies()
+  const sessionToken = cookieStore.get('sessionToken')
 
   return (
-    <html lang={locale}>
-      <body className={inter.className}>
+
+    <html suppressHydrationWarning={true} lang={locale}>
+      <body suppressHydrationWarning={true} className={inter.className}>
         <NextIntlClientProvider messages={messages}>
-          {children}
+          <AppProvider inititalSessionToken={sessionToken?.value} >
+            {children}
+          </AppProvider>
         </NextIntlClientProvider>
       </body>
     </html>
