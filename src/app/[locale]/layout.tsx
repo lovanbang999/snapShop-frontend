@@ -5,6 +5,7 @@ import { getMessages } from 'next-intl/server'
 import './globals.css'
 import AppProvider from '../AppProvider'
 import { cookies } from 'next/headers'
+import { Toaster } from '@/components/ui/toaster'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -29,6 +30,7 @@ export default async function RootLayout({
 
     <html suppressHydrationWarning={true} lang={locale}>
       <body suppressHydrationWarning={true} className={inter.className}>
+        <Toaster />
         <NextIntlClientProvider messages={messages}>
           <AppProvider inititalSessionToken={sessionToken?.value} >
             {children}
