@@ -1,5 +1,5 @@
 import envConfig from '@/config'
-import { url } from 'inspector'
+import { nomalizePath } from './utils'
 
 type CustomOptions = RequestInit & {
   baseUrl?: string | undefined
@@ -16,11 +16,14 @@ type EntityErrorPayload = {
 const ENTITY_ERROR_STATUS: number = 422
 const AUTHENTICATION_ERROR_STATUS: number = 401
 
-class HttpError extends Error {
+export class HttpError extends Error {
   status: number
-  payload?: any
+  payload?: {
+    message: string,
+    [key: string]: any
+  }
 
-  constructor({ status, payload = undefined }: { status: number, payload?: any }) {
+  constructor({ status, payload }: { status: number, payload: any }) {
     super('Http Error')
     this.status = status
     this.payload = payload
@@ -29,7 +32,7 @@ class HttpError extends Error {
 
 export class EntityError extends HttpError {
   status: 422
-  payload?: any
+  payload: EntityErrorPayload
   constructor({
     status,
     payload
@@ -43,10 +46,30 @@ export class EntityError extends HttpError {
   }
 }
 
-const request = async <Response>(method: 'GET' | 'POST' | 'PUT' | 'DELETE', url: string, options?: CustomOptions | undefined) => {
-  const body = options?.body ? JSON.stringify(options.body) : undefined
-  const baseHeaders = {
-    'Content-Type': 'application/json'
+export const isClient = () => typeof window !== 'undefined'
+
+const request = async <Response>(
+  method: 'GET' | 'POST' | 'PUT' | 'DELETE',
+  url: string,
+  options?: CustomOptions | undefined
+) => {
+  let body: FormData | string | undefined = undefined
+
+  if (options?.body instanceof FormData) {
+    body = options.body
+  } else if (options?.body) {
+    body = JSON.stringify(options.body)
+  }
+
+  const baseHeaders: {
+    [key: string]: string
+  } = body instanceof FormData ? {} : { 'Content-Type': 'application/json' }
+
+  if (isClient()) {
+    const sessionToken = localStorage.getItem('sessionToken')
+    if (sessionToken) {
+      baseHeaders.Authorization = `Bearer ${sessionToken}`
+    }
   }
 
   // If baseUrl is not passed (or baseUrl === undefined) then get it from envConfig.NEXT_PUBLIC_API_ENDPOINT
@@ -60,19 +83,34 @@ const request = async <Response>(method: 'GET' | 'POST' | 'PUT' | 'DELETE', url:
     headers: {
       ...baseHeaders,
       ...options?.headers
-    },
+    } as any,
     body,
     method
   })
 
-  const paloay: Response = await res.json()
+  const payload: Response = await res.json()
+
   const data = {
     status: res.status,
-    paloay
+    payload
   }
 
+  // Interceptor all request and response before return data to the client
   if (!res.ok) {
-    throw new HttpError(data)
+    if (res.status === ENTITY_ERROR_STATUS) {
+      throw new EntityError(data as unknown as { status: 422, payload: EntityErrorPayload })
+    } else {
+      throw new HttpError(data)
+    }
+  }
+
+  // Make sure the logic below only run on the client environment
+  if (isClient()) {
+    if (
+      ['login', 'signup'].some(item => item === nomalizePath(url))
+    ) {
+
+    }
   }
 
   return data

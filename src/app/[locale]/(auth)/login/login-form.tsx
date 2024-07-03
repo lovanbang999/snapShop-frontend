@@ -2,10 +2,10 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { Button } from '@/components/ui/button'
+import { Loader2 } from 'lucide-react'
 import {
   Form,
   FormControl,
@@ -20,10 +20,16 @@ import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline'
 import { useAppContext } from '@/app/AppProvider'
 import { loginBody, LoginBodyType } from '@/schemaValidations/auth.schema'
 import { authApiRequest } from '@/apiRequests/auth'
+import { useToast } from '@/components/ui/use-toast'
+import { useRouter } from 'next/navigation'
+import { handleErrorApi } from '@/lib/utils'
 
 function LogInForm() {
   const { setSessionToken } = useAppContext()
+  const [loading, setLoading] = useState(false)
   const [showPass, setShowPass] = useState(false)
+  const { toast } = useToast()
+  const router = useRouter()
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
     const name = e.currentTarget.getAttribute('data-name')
@@ -42,11 +48,31 @@ function LogInForm() {
 
   // 2. Define a submit handler.
   async function onSubmit(values: LoginBodyType) {
-    const result = await authApiRequest.login(values)
+    if (loading) return
+    setLoading(true)
 
-    await authApiRequest.auth({ sessionToken: result.paloay.metaData.tokens })
+    try {
+      const result = await authApiRequest.login(values)
 
-    setSessionToken(result?.paloay?.metaData?.tokens?.accessToken)
+      await authApiRequest.auth({ sessionToken: result.payload.metaData.tokens })
+
+      toast({
+        description: result?.payload?.message
+      })
+
+      setSessionToken(result?.payload?.metaData?.tokens?.accessToken)
+
+      router.push('/')
+      router.refresh()
+    } catch (error: any) {
+      handleErrorApi({
+        error,
+        setError: form.setError,
+        duration: 2000
+      })
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -98,7 +124,13 @@ function LogInForm() {
           <Link href='/fogot-password' className="link text-textColor text-sm">Forgot Password?</Link>
         </div>
 
-        <Button type="submit" className="w-32 self-center bg-main rounded-xl text-lg font-semibold">Sign In</Button>
+        {loading ? (
+          <Button className="w-32 self-center bg-main rounded-xl text-lg font-semibold" disabled>
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+          </Button>
+        ) : (
+          <Button type="submit" className="w-32 self-center bg-main rounded-xl text-lg font-semibold">Sign In</Button>
+        )}
       </form>
     </Form>
   )
