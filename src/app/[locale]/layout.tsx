@@ -25,6 +25,7 @@ export default async function RootLayout({
   const messages = await getMessages()
   const cookieStore = cookies()
   const sessionToken = cookieStore.get('sessionToken')
+  const userId = cookieStore.get('userId')
 
   return (
 
@@ -32,7 +33,7 @@ export default async function RootLayout({
       <body suppressHydrationWarning={true} className={inter.className}>
         <Toaster />
         <NextIntlClientProvider messages={messages}>
-          <AppProvider inititalSessionToken={sessionToken?.value} >
+          <AppProvider inititalUser={{ userId, sessionToken }} >
             {children}
           </AppProvider>
         </NextIntlClientProvider>

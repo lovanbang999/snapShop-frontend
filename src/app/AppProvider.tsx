@@ -1,10 +1,11 @@
 'use client'
 
 import { createContext, useContext, useState } from 'react'
+import { UserProps } from '@/schemaValidations/appProvider.schema'
 
 const AppContext = createContext({
-  sessionToken: '',
-  setSessionToken: (sessionToken: string) => {}
+  user: {},
+  setUser: (prevUser: UserProps) => {}
 })
 
 export const useAppContext = () => {
@@ -19,15 +20,15 @@ export const useAppContext = () => {
 
 export default function AppProvider({
   children,
-  inititalSessionToken = ''
+  inititalUser = { userId: '', username: '', email: '', sessionToken: '', refreshToken: '' }
 }: {
   children: React.ReactNode,
-  inititalSessionToken?: string
+  inititalUser?: UserProps
 }) {
-  const [sessionToken, setSessionToken] = useState(inititalSessionToken)
+  const [user, setUser] = useState<UserProps>(inititalUser)
 
   return (
-    <AppContext.Provider value={{ sessionToken, setSessionToken }}>
+    <AppContext.Provider value={{ user, setUser }}>
       {children}
     </AppContext.Provider>
   )

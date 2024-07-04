@@ -21,7 +21,7 @@ export const handleErrorApi = ({
     title: 'Error!',
     description: error?.payload?.message ?? 'An unknow error occurred!',
     variant: 'destructive',
-    duration: duration ?? 500
+    duration: duration ?? 1500
   })
 }
 

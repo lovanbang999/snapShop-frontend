@@ -4,13 +4,19 @@ import { BellIcon, MagnifyingGlassIcon, ShoppingCartIcon } from '@heroicons/reac
 import Link from 'next/link'
 import { Separator } from './ui/separator'
 import { ScrollArea } from './ui/scroll-area'
+import ButtonLogout from './button-logout'
+import { cookies } from 'next/headers'
 
 const tags = Array.from({ length: 50 }).map(
   (_, i, a) => `v1.2.0-beta.${a.length - i}`
 )
 
 function HeaderForUserLargeDevice() {
+  const cookieStore = cookies()
+  const sessionToken = cookieStore.get('sessionToken')?.value
+
   const tag = 0
+
   return (
     <header className="hidden md:block fixed z-50 w-dvw bg-main h-[70px]">
       <div className="navbar h-full px-7 lg:px-32">
@@ -124,11 +130,15 @@ function HeaderForUserLargeDevice() {
           </div>
 
           {/* Login btn */}
-          <Link href="/login" className='px-4'>
-            <Button variant='secondary' className='bg-white text-main font-bold'>
+          {sessionToken ? (
+            <ButtonLogout />
+          ):
+            (<Link href="/login" className='px-4'>
+              <Button variant='secondary' className='bg-white text-main font-bold'>
               Login
-            </Button>
-          </Link>
+              </Button>
+            </Link>)
+          }
         </div>
       </div>
     </header>
