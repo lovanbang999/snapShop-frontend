@@ -25,7 +25,7 @@ import { useRouter } from 'next/navigation'
 import { handleErrorApi } from '@/lib/utils'
 
 function LogInForm() {
-  const { setSessionToken } = useAppContext()
+  const { setUser } = useAppContext()
   const [loading, setLoading] = useState(false)
   const [showPass, setShowPass] = useState(false)
   const { toast } = useToast()
@@ -54,13 +54,16 @@ function LogInForm() {
     try {
       const result = await authApiRequest.login(values)
 
-      await authApiRequest.auth({ sessionToken: result.payload.metaData.tokens })
+      await authApiRequest.auth({ sessionToken: result.payload.metaData.tokens, user: result.payload.metaData.user })
 
       toast({
         description: result?.payload?.message
       })
 
-      setSessionToken(result?.payload?.metaData?.tokens?.accessToken)
+      const { _id: userId, email, username } = result?.payload?.metaData?.user
+      const { accessToken, refreshToken } = result?.payload?.metaData?.tokens
+
+      setUser({ userId, email, username, sessionToken: accessToken, refreshToken })
 
       router.push('/')
       router.refresh()

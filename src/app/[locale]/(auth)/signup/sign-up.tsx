@@ -32,7 +32,7 @@ function LogInForm() {
   const [showPass, setShowPass] = useState<showPassState>({})
   const [loading, setLoading] = useState(false)
   const { toast } = useToast()
-  const { setSessionToken } = useAppContext()
+  const { setUser } = useAppContext()
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
     const name = e.currentTarget.getAttribute('data-name')
@@ -59,13 +59,16 @@ function LogInForm() {
     try {
       const result = await authApiRequest.signup(values)
 
-      await authApiRequest.auth({ sessionToken: result.payload.metaData.tokens })
+      await authApiRequest.auth({ sessionToken: result.payload.metaData.tokens, user: result.payload.metaData.user })
 
       toast({
         description: result?.payload?.message
       })
 
-      setSessionToken(result?.payload?.metaData?.tokens?.accessToken)
+      const { _id: userId, email, username } = result?.payload?.metaData?.user
+      const { accessToken, refreshToken } = result?.payload?.metaData?.tokens
+
+      setUser({ userId, email, username, sessionToken: accessToken, refreshToken })
 
     } catch (error: any) {
       handleErrorApi({

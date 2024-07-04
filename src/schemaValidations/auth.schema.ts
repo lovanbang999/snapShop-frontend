@@ -20,7 +20,8 @@ export const loginRes = z.object({
   metaData: z.object({
     user: z.object({
       _id: z.string(),
-      username: z.string()
+      username: z.string(),
+      email: z.string()
     }),
     tokens: z.object({
       accessToken: z.string(),

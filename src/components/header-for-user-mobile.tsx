@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { Separator } from './ui/separator'
 import { ScrollArea } from './ui/scroll-area'
 import { UserIcon } from '@heroicons/react/16/solid'
+import { cookies } from 'next/headers'
+import ButtonLogout from './button-logout'
 
 const tags = Array.from({ length: 50 }).map(
   (_, i, a) => `v1.2.0-beta.${a.length - i}`
@@ -12,6 +14,10 @@ const tags = Array.from({ length: 50 }).map(
 
 function HeaderForUserMobile() {
   const tag = 0
+
+  const cookieStore = cookies()
+  const sessionToken = cookieStore.get('sessionToken')?.value
+
   return (
     <header className="md:hidden fixed z-50 w-dvw bg-main h-[120px]">
       <div className="navbar flex-col items-center justify-center h-full lg:px-32">
@@ -37,10 +43,16 @@ function HeaderForUserMobile() {
                     <div className="flex items-center justify-center bg-white rounded-2xl w-14 h-14 mr-3">
                       <UserIcon className="w-12 h-8 text-[#CCC]" />
                     </div>
-                    <div>
-                      <Link href="/login" className="text-xl font-semibold">Login</Link>
-                      <p className="text-base">Login to receive more offerss</p>
-                    </div>
+                    {sessionToken ? (
+                      <div>
+                        <ButtonLogout />
+                      </div>
+                    ): (
+                      <div>
+                        <Link href="/login" className="text-xl font-semibold">Login</Link>
+                        <p className="text-base">Login to receive more offerss</p>
+                      </div>
+                    )}
                   </div>
                   <ul className="p-4">
                     <li><a>Notification</a></li>
