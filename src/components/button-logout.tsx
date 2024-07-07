@@ -5,6 +5,7 @@ import { Button } from './ui/button'
 import { authApiRequest } from '@/apiRequests/auth'
 import { handleErrorApi } from '@/lib/utils'
 import { useAppContext } from '@/app/AppProvider'
+import { toast } from './ui/use-toast'
 
 function ButtonLogout() {
 
@@ -13,14 +14,21 @@ function ButtonLogout() {
 
   const handleLogout = async () => {
     try {
-      await authApiRequest.logoutFormNextClientToNextServer()
+      const result = await authApiRequest.logoutFormNextClientToNextServer()
+
+      toast({
+        description: result?.payload?.message
+      })
 
       router.push('/login')
-      setUser({ userId: '', email: '', username: '', sessionToken: '', refreshToken: '' })
     } catch (error) {
       handleErrorApi({
         error
       })
+    } finally {
+      setUser(null)
+      localStorage.removeItem('sessionToken')
+      router.refresh()
     }
   }
 

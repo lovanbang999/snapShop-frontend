@@ -68,5 +68,8 @@ const singupRes = z.object({
   })
 })
 
-export type SignUpBodyType = z.infer<typeof signUpBody>
 export type SignUpResType = z.infer<typeof singupRes>
+export type SignUpBodyType = z.infer<typeof signUpBody>
+
+const handleRefreshTokenRes = singupRes
+export type HandleRefreshTokenResType = z.infer<typeof handleRefreshTokenRes>

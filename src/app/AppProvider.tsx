@@ -1,34 +1,48 @@
 'use client'
 
-import { createContext, useContext, useState } from 'react'
+import { createContext, useCallback, useContext, useEffect, useState } from 'react'
 import { UserProps } from '@/schemaValidations/appProvider.schema'
 
-const AppContext = createContext({
-  user: {},
-  setUser: (prevUser: UserProps) => {}
-})
+const AppContext = createContext<{
+  user: UserProps | null
+  setUser: (user: UserProps | null) => void
+  isAuthenticated: boolean
+    }>({
+      user: null,
+      setUser: () => {},
+      isAuthenticated: false
+    })
 
 export const useAppContext = () => {
   const context = useContext(AppContext)
-
-  if (!context) {
-    throw new Error('UseAppContext must be used within an AppProvider')
-  }
 
   return context
 }
 
 export default function AppProvider({
-  children,
-  inititalUser = { userId: '', username: '', email: '', sessionToken: '', refreshToken: '' }
+  children
 }: {
-  children: React.ReactNode,
-  inititalUser?: UserProps
+  children: React.ReactNode
 }) {
-  const [user, setUser] = useState<UserProps>(inititalUser)
+  const [user, setUserState] = useState<UserProps | null>(() => null)
+
+  const isAuthenticated = Boolean(user)
+
+  const setUser = useCallback(
+    (user: UserProps | null) => {
+      setUserState(user)
+      localStorage.setItem('user', JSON.stringify(user))
+    },
+    [setUserState]
+  )
+
+  useEffect(() => {
+    const _user = localStorage.getItem('user')
+    setUserState(_user ? JSON.parse(_user) : null)
+  }, [setUserState])
 
   return (
-    <AppContext.Provider value={{ user, setUser }}>
+    <AppContext.Provider value={{ user, setUser, isAuthenticated }}>
       {children}
     </AppContext.Provider>
   )
