@@ -3,6 +3,22 @@ import { HttpError } from '@/lib/http'
 import { cookies } from 'next/headers'
 
 export async function POST(request: Request) {
+  const res = await request.json()
+
+  const force = res.force as boolean | undefined
+
+  if (force) {
+    return Response.json(
+      { message: 'Froced logout successfully!' },
+      {
+        status: 200,
+        headers: {
+          'Set-Cookie': 'sessionToken=; Path=/; HttpOnly; Max-Age=0'
+        }
+      }
+    )
+  }
+
   const cookieStore = cookies()
 
   const sessionToken = cookieStore.get('sessionToken')
@@ -24,15 +40,11 @@ export async function POST(request: Request) {
   try {
     const result = await authApiRequest.logoutFormNextServerToServer( userId.value, sessionToken.value )
 
-    const headers = new Headers()
-
-    // Delete cookies
-    headers.append('Set-Cookie', 'sessionToken=; Path=/; HttpOnly; Max-Age=0')
-    headers.append('Set-Cookie', 'userId=; Path=/; HttpOnly; Max-Age=0')
-
     return Response.json(result.payload, {
       status: 200,
-      headers: headers
+      headers: {
+        'Set-Cookie': 'sessionToken=; Path=/; HttpOnly; Max-Age=0'
+      }
     })
   } catch (error: any) {
     if (error instanceof HttpError) {

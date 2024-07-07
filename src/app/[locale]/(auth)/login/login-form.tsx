@@ -54,16 +54,17 @@ function LogInForm() {
     try {
       const result = await authApiRequest.login(values)
 
-      await authApiRequest.auth({ sessionToken: result.payload.metaData.tokens, user: result.payload.metaData.user })
+      await authApiRequest.auth({ sessionToken: result?.payload?.metaData?.tokens?.accessToken })
 
       toast({
         description: result?.payload?.message
       })
 
       const { _id: userId, email, username } = result?.payload?.metaData?.user
-      const { accessToken, refreshToken } = result?.payload?.metaData?.tokens
 
-      setUser({ userId, email, username, sessionToken: accessToken, refreshToken })
+      setUser({ userId, email, username })
+      localStorage.setItem('refreshToken', JSON.stringify(result?.payload?.metaData?.tokens?.refreshToken))
+      localStorage.setItem('sessionToken', JSON.stringify(result?.payload?.metaData?.tokens?.accessToken))
 
       router.push('/')
       router.refresh()

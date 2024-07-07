@@ -4,8 +4,8 @@ import { NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
 import './globals.css'
 import AppProvider from '../AppProvider'
-import { cookies } from 'next/headers'
 import { Toaster } from '@/components/ui/toaster'
+import HandleRefreshToken from '@/components/handle-refresh-token'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -23,9 +23,6 @@ export default async function RootLayout({
 }>) {
 
   const messages = await getMessages()
-  const cookieStore = cookies()
-  const sessionToken = cookieStore.get('sessionToken')
-  const userId = cookieStore.get('userId')
 
   return (
 
@@ -33,8 +30,9 @@ export default async function RootLayout({
       <body suppressHydrationWarning={true} className={inter.className}>
         <Toaster />
         <NextIntlClientProvider messages={messages}>
-          <AppProvider inititalUser={{ userId, sessionToken }} >
+          <AppProvider>
             {children}
+            <HandleRefreshToken />
           </AppProvider>
         </NextIntlClientProvider>
       </body>

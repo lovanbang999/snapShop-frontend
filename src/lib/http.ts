@@ -1,5 +1,7 @@
 import envConfig from '@/config'
-import { nomalizePath } from './utils'
+import { handleErrorApi, nomalizePath } from './utils'
+import { redirect } from 'next/navigation'
+import { LoginResType } from '@/schemaValidations/auth.schema'
 
 type CustomOptions = RequestInit & {
   baseUrl?: string | undefined
@@ -48,6 +50,7 @@ export class EntityError extends HttpError {
 
 export const isClient = () => typeof window !== 'undefined'
 
+let clientLogoutRequest: null | Response = null
 const request = async <Response>(
   method: 'GET' | 'POST' | 'PUT' | 'DELETE',
   url: string,
@@ -66,8 +69,9 @@ const request = async <Response>(
   } = body instanceof FormData ? {} : { 'Content-Type': 'application/json' }
 
   if (isClient()) {
-    const sessionToken = localStorage.getItem('sessionToken')
-    if (sessionToken) {
+    const _sessionToken = localStorage.getItem('sessionToken')
+    if (_sessionToken) {
+      const sessionToken = JSON.parse(_sessionToken)
       baseHeaders.Authorization = `Bearer ${sessionToken}`
     }
   }
@@ -99,6 +103,33 @@ const request = async <Response>(
   if (!res.ok) {
     if (res.status === ENTITY_ERROR_STATUS) {
       throw new EntityError(data as unknown as { status: 422, payload: EntityErrorPayload })
+    } else if (res.status === AUTHENTICATION_ERROR_STATUS) {
+      if (isClient()) {
+        if (!clientLogoutRequest) {
+          try {
+            clientLogoutRequest = await fetch('/api/auth/logout', {
+              method: 'POST',
+              body: JSON.stringify({ force: true }),
+              headers: {
+                ...baseHeaders
+              }
+            })
+          } catch (error) {
+            handleErrorApi({
+              error
+            })
+          } finally {
+            localStorage.removeItem('sessionToken')
+            localStorage.removeItem('refreshToken')
+            localStorage.removeItem('user')
+            clientLogoutRequest = null
+            location.href = '/login'
+          }
+        }
+      } else {
+        const sessionToken = ((options?.headers as any)?.Authorization as string).split(' ')[1]
+        redirect(`logout?sessionToken=${sessionToken}`)
+      }
     } else {
       throw new HttpError(data)
     }
@@ -107,9 +138,12 @@ const request = async <Response>(
   // Make sure the logic below only run on the client environment
   if (isClient()) {
     if (
-      ['login', 'signup'].some(item => item === nomalizePath(url))
+      ['login', 'register'].some(item => item === nomalizePath(url))
     ) {
-
+      const { accessToken } = (payload as LoginResType).metaData.tokens
+      localStorage.setItem('sessionToken', JSON.stringify(accessToken))
+    } else if ('logout' === nomalizePath(url)) {
+      localStorage.removeItem('sessionToken')
     }
   }
 
