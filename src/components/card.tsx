@@ -17,7 +17,7 @@ interface CartProps {
 
 function Card({ imgSrc, imgAlt = 'Image product', title, price, rating, tag }: CartProps) {
   return (
-    <div className='relative flex shrink grow flex-col min-w-[170px] md:min-w-[240px] h-[380px] justify-center shadow-md rounded-sm p-4'>
+    <div className='relative bg-[#fff] text-[#000] flex shrink grow flex-col min-w-[170px] md:min-w-[240px] h-[380px] justify-center shadow-md rounded-sm p-4'>
       {!!tag && (
         <div className="absolute top-[-4px] left-[-6px] bg-tag text-white py-1 px-3 max-w-[62px] shadow-lg rounded-sm">{tag}</div>
       )}
@@ -36,7 +36,7 @@ function Card({ imgSrc, imgAlt = 'Image product', title, price, rating, tag }: C
       <div className="flex justify-between items-center justify-self-end">
         {/* Rating */}
         <div className="flex-col flex-1">
-          <p className="text-third text-lg font-bold">{price}</p>
+          <p className="text-[#FF3D00] text-lg font-bold">{price}</p>
           <div className="hidden lg:flex">
             <CustomRating initialRating={rating} readonly/>
           </div>

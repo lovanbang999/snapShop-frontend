@@ -87,9 +87,9 @@ function LogInForm() {
           name="username"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Username</FormLabel>
+              <FormLabel className='text-black'>Username</FormLabel>
               <FormControl>
-                <Input placeholder="Enter your username" {...field} className="border-none bg-[#F4F7FA] rounded-xl" />
+                <Input placeholder="Enter your username" {...field} className="border-none bg-[#F4F7FA] text-black rounded-xl" />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -100,12 +100,12 @@ function LogInForm() {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>password</FormLabel>
+              <FormLabel className='text-black'>password</FormLabel>
               <FormControl>
                 <div className="relative flex">
-                  <Input placeholder="Enter your password" {...field} type={showPass ? 'text': 'password'} className="border-none bg-[#F4F7FA] rounded-xl" />
+                  <Input placeholder="Enter your password" {...field} type={showPass ? 'text': 'password'} className="border-none bg-[#F4F7FA] text-black rounded-xl" />
                   <div className="absolute right-2 top-0 translate-y-2/4 cursor-pointer" data-name="btnPassword" onClick={handleClick}>
-                    {showPass ? <EyeSlashIcon className="w-5 h-5" /> : <EyeIcon className="w-5 h-5" />}
+                    {showPass ? <EyeSlashIcon className="w-5 h-5 text-black" /> : <EyeIcon className="w-5 h-5 text-black" />}
                   </div>
                 </div>
               </FormControl>

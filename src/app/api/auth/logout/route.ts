@@ -29,7 +29,7 @@ export async function POST(request: Request) {
     )
   }
 
-  const userId = cookieStore.get('userId')
+  const userId = res.userId
   if (!userId) {
     return Response.json(
       { message: 'Did not receive userId!' },
@@ -38,7 +38,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    const result = await authApiRequest.logoutFormNextServerToServer( userId.value, sessionToken.value )
+    const result = await authApiRequest.logoutFormNextServerToServer( userId, sessionToken.value )
 
     return Response.json(result.payload, {
       status: 200,

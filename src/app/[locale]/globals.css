@@ -4,6 +4,26 @@
 
 @layer base {
   :root {
+    /* Custom */
+    --snap-primary: 189 72% 36%;
+    --snap-primary-foreground: 0 0% 0%;
+
+    --snap-bg: 0 0% 96%;
+
+    --snap-card: 0 0% 100%;
+
+    --snap-badge: 0 0% 0%;
+    --snap-badge-foreground: 0 0% 100%;
+
+    --snap-white-dark: 0 0% 100%;
+
+    --snap-black-white: 0 0% 100%;
+    --snap-white-black: 0 0% 0%;
+
+    --text: 0 0% 0%;
+    /* End custom */
+
+
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
 
@@ -36,6 +56,25 @@
   }
 
   .dark {
+    /* Custom */
+    --snap-primary: 190 42% 43%;
+    --snap-primary-foreground: 0 0% 100%;
+
+    --snap-bg: 0 0% 74%;
+
+    --snap-card: 0 0% 80%;
+
+    --snap-badge: 0 0% 100%;
+    --snap-badge-foreground: 0 0% 0%;
+
+    --snap-white-dark: 0 0% 80%;
+
+    --snap-black-white: 0 0% 0%;
+    --snap-white-black: 0 0% 100%;
+
+    --text: 0 0% 100%;
+    /* End custom */
+
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
 

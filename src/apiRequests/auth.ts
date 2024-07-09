@@ -18,13 +18,15 @@ export const authApiRequest = {
     ),
   auth: ( body: { sessionToken: string }) => http.post('/api/auth', body, { baseUrl: '' }),
   logoutFormNextClientToNextServer: (
+    userId?: string,
     force?: boolean | undefined,
     signal?: AbortSignal | undefined
   ) =>
     http.post<MessageResType>(
       '/api/auth/logout',
       {
-        force
+        force,
+        userId
       },
       {
         baseUrl: '',

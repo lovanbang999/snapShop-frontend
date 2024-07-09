@@ -6,6 +6,7 @@ import './globals.css'
 import AppProvider from '../AppProvider'
 import { Toaster } from '@/components/ui/toaster'
 import HandleRefreshToken from '@/components/handle-refresh-token'
+import { ThemeProvider } from '@/components/theme-provider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -28,13 +29,20 @@ export default async function RootLayout({
 
     <html suppressHydrationWarning={true} lang={locale}>
       <body suppressHydrationWarning={true} className={inter.className}>
-        <Toaster />
-        <NextIntlClientProvider messages={messages}>
-          <AppProvider>
-            {children}
-            <HandleRefreshToken />
-          </AppProvider>
-        </NextIntlClientProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Toaster />
+          <NextIntlClientProvider messages={messages}>
+            <AppProvider>
+              {children}
+              <HandleRefreshToken />
+            </AppProvider>
+          </NextIntlClientProvider>
+        </ThemeProvider>
       </body>
     </html>
   )
