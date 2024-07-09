@@ -6,6 +6,7 @@ import { Separator } from './ui/separator'
 import { ScrollArea } from './ui/scroll-area'
 import ButtonLogout from './button-logout'
 import { cookies } from 'next/headers'
+import { ModeToggle } from './toggle-theme'
 
 const tags = Array.from({ length: 50 }).map(
   (_, i, a) => `v1.2.0-beta.${a.length - i}`
@@ -36,11 +37,14 @@ function HeaderForUserLargeDevice() {
           {/* Search */}
           <div className="flex items-center w-[320px] lg:w-[540px] h-[80%] bg-white rounded-sm ml-10 lg:ml-28">
             <input type="text" placeholder="Search product here..." className="flex-1 h-full pl-2 bg-transparent text-main border-none outline-none placeholder:text-main"/>
-            <Button variant="ghost">
+            <Button variant="ghost" className='rounded-r-sm ml-1'>
               <MagnifyingGlassIcon className='w-6 h-6 text-main'/>
             </Button>
           </div>
         </div>
+
+        {/* Toggle mode */}
+        <ModeToggle />
 
         {/* Action */}
         <div className="flex-none gap-5 ml-3 lg:gap-10">
@@ -49,7 +53,7 @@ function HeaderForUserLargeDevice() {
             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
               <div className="indicator">
                 <ShoppingCartIcon className="w-6 h-6 text-white" />
-                <span className="badge badge-sm indicator-item bg-white border-none text-third">0</span>
+                <span className="badge badge-sm indicator-item bg-badge border-none text-badge-foreground">0</span>
               </div>
             </div>
             <div tabIndex={0} className="mt-3 z-[1] card card-compact dropdown-content w-[250px] bg-[#F5F5F5] shadow">
@@ -92,7 +96,7 @@ function HeaderForUserLargeDevice() {
             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
               <div className="indicator">
                 <BellIcon className="w-6 h-6 text-white"/>
-                <span className="badge badge-sm indicator-item bg-white border-none text-third">8</span>
+                <span className="badge badge-sm indicator-item bg-badge border-none text-badge-foreground">8</span>
               </div>
             </div>
             <div tabIndex={0} className="mt-3 z-[1] card card-compact dropdown-content w-[250px] bg-[#F5F5F5] shadow">

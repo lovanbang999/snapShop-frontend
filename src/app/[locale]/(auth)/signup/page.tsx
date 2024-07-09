@@ -6,17 +6,18 @@ import Image from 'next/image'
 import Link from 'next/link'
 import LogInForm from './sign-up'
 import clsx from 'clsx'
+import { ModeToggle } from '@/components/toggle-theme'
 
 function Page() {
   const [click, setClick] = useState(false)
 
   return (
-    <div className="flex items-center justify-center w-dvw h-dvh bg-[#f5f5f5]">
-      <div className="flex w-[770px] h-fit bg-white rounded-xl">
+    <div className="relative flex items-center justify-center w-dvw h-dvh bg-third">
+      <div className="flex w-[770px] h-fit bg-light-dark rounded-xl">
 
         {/* Form */}
         <div className="flex flex-1 flex-col items-center py-8 px-6">
-          <h2 className="text-3xl font-bold">SignUp</h2>
+          <h2 className="text-3xl font-bold text-black">SignUp</h2>
 
           <LogInForm />
         </div>
@@ -41,6 +42,10 @@ function Page() {
             <Link href='/login'>Login</Link>
           </Button>
         </div>
+      </div>
+
+      <div className='absolute top-1 right-1'>
+        <ModeToggle />
       </div>
     </div>
   )

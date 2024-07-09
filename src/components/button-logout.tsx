@@ -10,11 +10,11 @@ import { toast } from './ui/use-toast'
 function ButtonLogout() {
 
   const router = useRouter()
-  const { setUser } = useAppContext()
+  const { user, setUser } = useAppContext()
 
   const handleLogout = async () => {
     try {
-      const result = await authApiRequest.logoutFormNextClientToNextServer()
+      const result = await authApiRequest.logoutFormNextClientToNextServer(user?.userId)
 
       toast({
         description: result?.payload?.message
@@ -28,6 +28,7 @@ function ButtonLogout() {
     } finally {
       setUser(null)
       localStorage.removeItem('sessionToken')
+      // localStorage.removeItem('refreshToken')
       router.refresh()
     }
   }
