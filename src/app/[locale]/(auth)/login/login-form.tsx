@@ -133,7 +133,7 @@ function LogInForm() {
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
           </Button>
         ) : (
-          <Button type="submit" className="w-32 self-center bg-main rounded-xl text-lg font-semibold">Sign In</Button>
+          <Button type="submit" className="w-full rounded-sm md:w-32 self-center bg-main md:rounded-xl text-lg font-semibold">LogIn</Button>
         )}
       </form>
     </Form>

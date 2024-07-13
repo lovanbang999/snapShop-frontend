@@ -19,9 +19,9 @@ function HeaderForUserLargeDevice() {
   const tag = 0
 
   return (
-    <header className="hidden md:block fixed z-50 w-dvw bg-main h-[70px]">
+    <header className="hidden md:block fixed z-50 w-dvw bg-main h-[70px] shadow-md">
       <div className="navbar h-full px-7 lg:px-32">
-        <div className='flex-1'>
+        <div className="flex flex-1 mr-4">
           {/* Logo */}
           <div className="w-[100px]">
             <Link href='#'>
@@ -35,8 +35,8 @@ function HeaderForUserLargeDevice() {
           </div>
 
           {/* Search */}
-          <div className="flex items-center w-[320px] lg:w-[540px] h-[80%] bg-white rounded-sm ml-10 lg:ml-28">
-            <input type="text" placeholder="Search product here..." className="flex-1 h-full pl-2 bg-transparent text-main border-none outline-none placeholder:text-main"/>
+          <div className="flex items-center w-[280px] lg:w-[540px] h-[80%] bg-white rounded-sm ml-10 lg:ml-28">
+            <input type="text" placeholder="Search product here..." className="w-[80%] lg:flex-1 h-full pl-2 bg-transparent text-main border-none outline-none placeholder:text-main"/>
             <Button variant="ghost" className='rounded-r-sm ml-1'>
               <MagnifyingGlassIcon className='w-6 h-6 text-main'/>
             </Button>
@@ -79,7 +79,7 @@ function HeaderForUserLargeDevice() {
                       width={200}
                       height={300}
                       alt='No cart'
-                      className='self-center'
+                      className='w-auto h-auto self-center'
                     />
                   )
                 }

@@ -19,7 +19,7 @@ function HeaderForUserMobile() {
   const sessionToken = cookieStore.get('sessionToken')?.value
 
   return (
-    <header className="md:hidden fixed z-50 w-dvw bg-main h-[120px]">
+    <header className="md:hidden fixed z-50 w-dvw bg-main h-[120px] shadow-md">
       <div className="navbar flex-col items-center justify-center h-full lg:px-32">
 
         {/* Nav */}
@@ -79,7 +79,7 @@ function HeaderForUserMobile() {
             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
               <div className="indicator">
                 <ShoppingCartIcon className="w-6 h-6 text-white" />
-                <span className="badge badge-sm indicator-item bg-white border-none text-third">0</span>
+                <span className="badge badge-sm indicator-item bg-badge border-none text-badge-foreground">0</span>
               </div>
             </div>
             <div tabIndex={0} className="mt-3 z-[1] card card-compact dropdown-content w-[250px] bg-[#F5F5F5] shadow">
@@ -105,7 +105,7 @@ function HeaderForUserMobile() {
                       width={200}
                       height={300}
                       alt='No cart'
-                      className='self-center'
+                      className='w-auto h-auto self-center'
                     />
                   )
                 }

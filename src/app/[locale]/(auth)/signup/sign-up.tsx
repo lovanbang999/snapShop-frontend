@@ -27,7 +27,7 @@ interface showPassState {
   [key: string]: boolean;
 }
 
-function LogInForm() {
+function SinUpForm() {
 
   const [showPass, setShowPass] = useState<showPassState>({})
   const [loading, setLoading] = useState(false)
@@ -153,11 +153,11 @@ function LogInForm() {
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
           </Button>
         ) : (
-          <Button type="submit" className="w-32 self-center bg-main rounded-xl text-lg font-semibold">Sign In</Button>
+          <Button type="submit" className="w-full md:w-32 self-center bg-main rounded-sm md:rounded-xl text-lg font-semibold">Sign In</Button>
         )}
       </form>
     </Form>
   )
 }
 
-export default LogInForm
+export default SinUpForm

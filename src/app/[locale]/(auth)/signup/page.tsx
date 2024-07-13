@@ -4,26 +4,41 @@ import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 import Link from 'next/link'
-import LogInForm from './sign-up'
 import clsx from 'clsx'
 import { ModeToggle } from '@/components/toggle-theme'
+import { ChevronLeftIcon } from '@heroicons/react/16/solid'
+import SinUpForm from './sign-up'
 
 function Page() {
   const [click, setClick] = useState(false)
 
   return (
     <div className="relative flex items-center justify-center w-dvw h-dvh bg-third">
-      <div className="flex w-[770px] h-fit bg-light-dark rounded-xl">
+      <Link href='/' className="">
+        <Button variant='ghost' className="absolute left-1 top-1 flex items-center gap-1">
+          <ChevronLeftIcon className="w-5 h-5" />
+          Home
+        </Button>
+      </Link>
+
+      <div className="flex w-[770px] h-fit bg-third md:bg-light-dark rounded-xl">
 
         {/* Form */}
         <div className="flex flex-1 flex-col items-center py-8 px-6">
           <h2 className="text-3xl font-bold text-black">SignUp</h2>
 
-          <LogInForm />
+          <SinUpForm />
+
+          <div className="flex items-center md:hidden mt-4">
+            <p className="text-textColor">Do you already have an account?</p>
+            <Link href='/login' passHref className="link ml-2 text-main">
+              Login now
+            </Link>
+          </div>
         </div>
 
         {/* Nav to login */}
-        <div className={clsx('flex flex-col items-center justify-between w-6/12 h-[100] px-4 py-8 bg-main rounded-l-3xl rounded-r-xl z-10', {
+        <div className={clsx('hidden md:flex flex-col items-center justify-between w-6/12 h-[100] px-4 py-8 bg-main rounded-l-3xl rounded-r-xl z-10', {
           '-translate-x-full duration-200 ease-linear': click
         })}>
           <Image

@@ -35,11 +35,11 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Toaster />
           <NextIntlClientProvider messages={messages}>
             <AppProvider>
               {children}
               <HandleRefreshToken />
+              <Toaster />
             </AppProvider>
           </NextIntlClientProvider>
         </ThemeProvider>
