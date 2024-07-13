@@ -1,0 +1,25 @@
+.triangle {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border-top-right-radius: 10%;
+  transform: rotate(-60deg) skewX(-30deg) scale(1, .86);
+}
+
+.triangle::before,
+.triangle::after {
+  content: '';
+  position: absolute;
+  width: inherit;
+  height: inherit;
+  background: inherit;
+  border-top-right-radius: inherit;
+}
+
+.triangle::before {
+  transform: rotate(-135deg) skewX(-45deg) scale(1.414, .707) translateY(-50%);
+}
+
+.triangle::after {
+  transform: rotate(135deg) skewY(-45deg) scale(.707, 1.414) translateX(50%);
+}

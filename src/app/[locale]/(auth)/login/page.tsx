@@ -7,16 +7,24 @@ import Link from 'next/link'
 import LogInForm from './login-form'
 import clsx from 'clsx'
 import { ModeToggle } from '@/components/toggle-theme'
+import { ChevronLeftIcon } from '@heroicons/react/16/solid'
 
 function Page() {
   const [click, setClick] = useState(false)
 
   return (
     <div className="relative flex items-center justify-center w-dvw h-dvh bg-third">
+      <Link href='/'>
+        <Button variant='ghost' className="absolute left-1 top-1 flex items-center gap-1">
+          <ChevronLeftIcon className="w-5 h-5" />
+          Home
+        </Button>
+      </Link>
 
-      {/* Nav to signup */}
-      <div className="flex w-[770px] h-[490px] bg-light-dark rounded-xl">
-        <div className={clsx('flex flex-col items-center justify-between w-6/12 h-full px-4 py-8 bg-main rounded-l-xl rounded-r-3xl z-10', {
+      <div className="flex w-[770px] h-[490px] bg-third md:bg-light-dark rounded-xl">
+
+        {/* Nav to signup */}
+        <div className={clsx('hidden md:flex flex-col items-center justify-between w-6/12 h-full px-4 py-8 bg-main rounded-l-xl rounded-r-3xl z-10', {
           'translate-x-full duration-200 ease-linear': click
         })}>
           <Image
@@ -73,10 +81,17 @@ function Page() {
           <p className="my-4 text-black">Or log in with username and password</p>
 
           <LogInForm />
+
+          <div className="flex items-center md:hidden mt-4">
+            <p className="text-textColor">Do you not have an account?</p>
+            <Link href='/signup' passHref className="link ml-2 text-main">
+              Register now
+            </Link>
+          </div>
         </div>
       </div>
 
-      <div className='absolute top-1 right-1'>
+      <div className="absolute top-1 right-1">
         <ModeToggle />
       </div>
     </div>

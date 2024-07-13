@@ -13,7 +13,7 @@ function Footer() {
               width={45}
               height={45}
               alt="Plane icon"
-              className="mr-5"
+              className="w-[45px] h-[45px] mr-5"
             />
             <p className="text-white text-2xl font-bold">Sign Up For Newsletter</p>
           </div>
@@ -50,6 +50,7 @@ function Footer() {
                   width={30}
                   height={30}
                   alt="Plane icon"
+                  className='w-[30px] h-[30px]'
                 />
               </button>
               <button className="btn btn-circle bg-[#D9D9D9] border-none hover:bg-[#D9D9D9]">
@@ -58,6 +59,7 @@ function Footer() {
                   width={30}
                   height={30}
                   alt="Plane icon"
+                  className='w-[30px] h-[30px]'
                 />
               </button>
               <button className="btn btn-circle bg-[#D9D9D9] border-none hover:bg-[#D9D9D9]">
@@ -66,6 +68,7 @@ function Footer() {
                   width={30}
                   height={30}
                   alt="Plane icon"
+                  className='w-[30px] h-[30px]'
                 />
               </button>
             </div>
@@ -127,6 +130,7 @@ function Footer() {
                   width={30}
                   height={30}
                   alt="Plane icon"
+                  className='w-[30px] h-[30px]'
                 />
                 <div className="pl-2">
                   <p>Get it on</p>
@@ -139,6 +143,7 @@ function Footer() {
                   width={30}
                   height={30}
                   alt="Plane icon"
+                  className='w-[30px] h-[30px]'
                 />
                 <div className="pl-2">
                   <p>Get it on</p>
