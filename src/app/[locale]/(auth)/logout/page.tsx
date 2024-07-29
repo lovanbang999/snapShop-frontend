@@ -20,7 +20,7 @@ function LogoutLogic() {
 
     if (sessionToken === JSON.parse(localStorage.getItem('sessionToken') ?? '')) {
       authApiRequest
-        .logoutFormNextClientToNextServer(true, signal)
+        .logoutFormNextClientToNextServer(undefined, undefined, signal)
         .then((res: any) => {
           setUser(null)
           router.push(`/login?redirectFrom=${pathname.split('/en')[1].toString()}`)
