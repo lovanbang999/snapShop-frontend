@@ -123,3 +123,29 @@
 .scrollbar-hide::-webkit-scrollbar {
   display: none;  /* Safari and Chrome */
 }
+
+/* Custom scrollbar styles */
+.scrollbar-custom {
+  scrollbar-width: initial;
+  scrollbar-color: #888 #f4f7fa;
+}
+
+/* For WebKit-based browsers (e.g., Chrome, Safari) */
+.scrollbar-custom::-webkit-scrollbar {
+  height: 15px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-track {
+  background: #f4f7fa;
+  border-radius: 10px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 10px;
+  border: 2px solid #f4f7fa;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}

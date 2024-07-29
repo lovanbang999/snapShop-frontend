@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { Button } from '@/components/ui/button'
-import { Loader2 } from 'lucide-react'
 import {
   Form,
   FormControl,
@@ -24,7 +23,8 @@ import { useToast } from '@/components/ui/use-toast'
 import { useRouter } from 'next/navigation'
 import { handleErrorApi } from '@/lib/utils'
 
-function LogInForm() {
+export default function LogInForm() {
+
   const { setUser } = useAppContext()
   const [loading, setLoading] = useState(false)
   const [showPass, setShowPass] = useState(false)
@@ -130,7 +130,7 @@ function LogInForm() {
 
         {loading ? (
           <Button className="w-32 self-center bg-main rounded-xl text-lg font-semibold" disabled>
-            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            <span className="loading loading-spinner loading-xs"></span>
           </Button>
         ) : (
           <Button type="submit" className="w-full rounded-sm md:w-32 self-center bg-main md:rounded-xl text-lg font-semibold">LogIn</Button>
@@ -139,5 +139,3 @@ function LogInForm() {
     </Form>
   )
 }
-
-export default LogInForm

@@ -15,11 +15,9 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline'
-import envConfig from '@/config'
 import { signUpBody, SignUpBodyType } from '@/schemaValidations/auth.schema'
 import { authApiRequest } from '@/apiRequests/auth'
 import { handleErrorApi } from '@/lib/utils'
-import { Loader2 } from 'lucide-react'
 import { useToast } from '@/components/ui/use-toast'
 import { useAppContext } from '@/app/AppProvider'
 
@@ -150,7 +148,7 @@ function SinUpForm() {
 
         {loading ? (
           <Button className="w-32 self-center bg-main rounded-xl text-lg font-semibold" disabled>
-            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            <span className="loading loading-spinner loading-xs"></span>
           </Button>
         ) : (
           <Button type="submit" className="w-full md:w-32 self-center bg-main rounded-sm md:rounded-xl text-lg font-semibold">Sign In</Button>
