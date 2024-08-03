@@ -1,5 +1,5 @@
 import http from '@/lib/http'
-import { HandleRefreshTokenResType, LoginBodyType, LoginResType, SignUpBodyType, SignUpResType } from '@/schemaValidations/auth.schema'
+import { ExchangeResType, HandleRefreshTokenResType, LoginBodyType, LoginResType, SignUpBodyType, SignUpResType } from '@/schemaValidations/auth.schema'
 import { MessageResType } from '@/schemaValidations/common.schema'
 
 export const authApiRequest = {
@@ -43,5 +43,7 @@ export const authApiRequest = {
           Authorization: `Bearer ${sessionToken}`
         }
       }
-    )
+    ),
+  handleGoogleCallback: (code: string) =>
+    http.post<ExchangeResType>('/auth/exchange', { code })
 }

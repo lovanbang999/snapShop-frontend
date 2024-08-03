@@ -73,3 +73,6 @@ export type SignUpBodyType = z.infer<typeof signUpBody>
 
 const handleRefreshTokenRes = singupRes
 export type HandleRefreshTokenResType = z.infer<typeof handleRefreshTokenRes>
+
+const exchangeRes = loginRes
+export type ExchangeResType = z.TypeOf<typeof exchangeRes>
