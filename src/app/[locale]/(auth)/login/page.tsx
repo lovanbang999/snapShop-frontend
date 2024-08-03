@@ -49,14 +49,16 @@ function Page() {
           <h2 className="text-3xl font-bold text-black">LogIn</h2>
 
           <div className="flex gap-3 mt-4">
-            <Button variant="outline" size="icon" className="w-10 h-10 p-1">
-              <Image
-                src="/icon-google-color.svg"
-                width={100}
-                height={100}
-                alt="google icon"
-                className="justify-self-center"
-              />
+            <Button asChild variant="outline" size="icon" className="w-10 h-10 p-1">
+              <Link href='http://localhost:5000/v1/api/auth/google'>
+                <Image
+                  src="/icon-google-color.svg"
+                  width={100}
+                  height={100}
+                  alt="google icon"
+                  className="justify-self-center"
+                />
+              </Link>
             </Button>
             <Button variant="outline" size="icon" className="w-10 h-10 p-1">
               <Image
