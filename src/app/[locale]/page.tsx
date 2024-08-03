@@ -4,6 +4,8 @@ import Footer from '@/components/footer'
 import HeaderForUser from '@/components/header-for-user'
 import { Button } from '@/components/ui/button'
 import { ChevronRightIcon } from '@heroicons/react/16/solid'
+import { DevicePhoneMobileIcon, ShoppingBagIcon, TrophyIcon } from '@heroicons/react/24/outline'
+import { BadgePercentIcon, BookTextIcon, CatIcon, GiftIcon, HeadsetIcon, HeartPulseIcon, LaptopMinimalIcon, ShapesIcon, ShirtIcon, TruckIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
@@ -22,13 +24,7 @@ export default function Home() {
         <div className="hidden md:flex justify-center py-2 bg-white w-full rounded-md ">
           <div className="flex gap-20 px-4 lg:gap-32 overflow-x-auto scrollbar-hide">
             <div className="flex grow-0 shrink-0 items-center gap-4">
-              <Image
-                src='/icon-shipping.svg'
-                width={30}
-                height={30}
-                alt='Icon shipping'
-                className='w-[30px] h-[30px] text-black'
-              />
+              <TruckIcon className='w-7 h-7' />
               <div className="text-black">
                 <p className="font-bold">Free ship</p>
                 <p>Oder over $100</p>
@@ -36,13 +32,7 @@ export default function Home() {
             </div>
 
             <div className="flex grow-0 shrink-0 items-center gap-4">
-              <Image
-                src='/icon-gift.svg'
-                width={30}
-                height={30}
-                alt='Icon gift'
-                className='w-[30px] h-[30px] text-black'
-              />
+              <GiftIcon className='w-7 h-7' />
               <div className="text-black">
                 <p className="font-bold">Daily Surprise offers</p>
                 <p>Save up to 25% off</p>
@@ -50,13 +40,7 @@ export default function Home() {
             </div>
 
             <div className="flex grow-0 shrink-0 items-center gap-4">
-              <Image
-                src='/icon-seal-percent.svg'
-                width={30}
-                height={30}
-                alt='Icon seal percent'
-                className='w-[30px] h-[30px] text-black'
-              />
+              <BadgePercentIcon className='w-7 h-7' />
               <div className="text-black">
                 <p className="font-bold">Affordable prices</p>
                 <p>Get factory direct price</p>
@@ -64,13 +48,7 @@ export default function Home() {
             </div>
 
             <div className="flex grow-0 shrink-0 items-center gap-4">
-              <Image
-                src='/icon-advise.svg'
-                width={30}
-                height={30}
-                alt='Icon advise'
-                className='w-[30px] h-[30px] text-black'
-              />
+              <HeadsetIcon />
               <div className="text-black">
                 <p className="font-bold">Support 24/7</p>
                 <p>Shop with an expert</p>
@@ -123,101 +101,47 @@ export default function Home() {
         <div className="w-full bg-[#1a8a9e] rounded-md px-4">
           <div className="flex justify-evenly md:justify-center gap-5 md:gap-8 w-full overflow-x-auto scrollbar-hide">
             <Button className="h-fit flex flex-col bg-transparent">
-              <Image
-                src='/nav-categories/icon-laptop.svg'
-                width={30}
-                height={30}
-                alt='Laptop icon'
-                className='w-[30px] h-[30px]'
-              />
+              <LaptopMinimalIcon className='w-6 h-6 mb-1' />
               <p>Laptop</p>
             </Button>
 
             <Button className="h-fit flex flex-col bg-transparent">
-              <Image
-                src='/nav-categories/icon-phone.svg'
-                width={30}
-                height={30}
-                alt='Phone icon'
-                className='w-[30px] h-[30px]'
-              />
+              <DevicePhoneMobileIcon className='w-6 h-6 mb-1' />
               <p>Smart Phone</p>
             </Button>
 
             <Button className="h-fit flex flex-col bg-transparent">
-              <Image
-                src='/nav-categories/icon-fashion.svg'
-                width={30}
-                height={30}
-                alt='Fashion icon'
-                className='w-[30px] h-[30px]'
-              />
+              <ShirtIcon className='w-6 h-6 mb-1' />
               <p>Fashion</p>
             </Button>
 
             <Button className="h-fit flex flex-col bg-transparent">
-              <Image
-                src='/nav-categories/icon-shopping-bag.svg'
-                width={30}
-                height={30}
-                alt='Shopping bag icon'
-                className='w-[30px] h-[30px]'
-              />
+              <ShoppingBagIcon className='w-6 h-6 mb-1' />
               <p>Beauty</p>
             </Button>
 
             <Button className="h-fit flex flex-col bg-transparent">
-              <Image
-                src='/nav-categories/icon-heart-pulse.svg'
-                width={30}
-                height={30}
-                alt='Heart pulse icon'
-                className='w-[30px] h-[30px]'
-              />
+              <HeartPulseIcon className='w-6 h-6 mb-1' />
               <p>Health</p>
             </Button>
 
             <Button className="h-fit flex flex-col bg-transparent">
-              <Image
-                src='/nav-categories/icon-trophy.svg'
-                width={30}
-                height={30}
-                alt='Trophy icon'
-                className='w-[30px] h-[30px]'
-              />
+              <TrophyIcon className='w-6 h-6 mb-1' />
               <p>Sport</p>
             </Button>
 
             <Button className="h-fit flex flex-col bg-transparent">
-              <Image
-                src='/nav-categories/icon-toy.svg'
-                width={30}
-                height={30}
-                alt='Toys icon'
-                className='w-[30px] h-[30px]'
-              />
+              <ShapesIcon className='w-6 h-6 mb-1' />
               <p>Toys</p>
             </Button>
 
             <Button className="h-fit flex flex-col bg-transparent">
-              <Image
-                src='/nav-categories/icon-book.svg'
-                width={30}
-                height={30}
-                alt='Book icon'
-                className='w-[30px] h-[30px]'
-              />
+              <BookTextIcon className='w-6 h-6 mb-1' />
               <p>Books</p>
             </Button>
 
             <Button className="h-fit flex flex-col bg-transparent">
-              <Image
-                src='/nav-categories/icon-pet.svg'
-                width={30}
-                height={30}
-                alt='pet icon'
-                className='w-[30px] h-[30px]'
-              />
+              <CatIcon className='w-6 h-6 mb-1' />
               <p>Pets</p>
             </Button>
           </div>
