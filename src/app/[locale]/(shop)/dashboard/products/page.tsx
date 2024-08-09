@@ -18,7 +18,6 @@ export default function Page() {
   const searchParams = useSearchParams()
   const tab = searchParams.get('type')
   const [isLoading, setIsLoading] = useState(false)
-
   const [products, setProducts] = useState<ProductType[]>([])
 
   useEffect(() => {
@@ -28,7 +27,7 @@ export default function Page() {
         const queryParams = new URLSearchParams(Array.from(searchParams.entries())).toString()
         if (user) {
           const response = await productRequest.getGenarelProductsFromClientToNextServer(queryParams, user.userId)
-          setProducts(response.payload.metaData)
+          setProducts(response.metaData)
         }
       } catch (error) {
         handleErrorApi({
@@ -72,7 +71,7 @@ export default function Page() {
       <div className="flex h-full flex-col mt-10">
         <TabNavigationForShop />
         {isLoading ? (
-          <div className="w-full flex-1 flex items-center justify-center">
+          <div className="w-full flex-1 flex items-center justify-center text-main">
             <span className="loading loading-dots loading-md"></span>
           </div>
         ) : (

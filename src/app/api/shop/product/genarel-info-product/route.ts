@@ -1,5 +1,5 @@
 import { productRequest } from '@/apiRequests/product'
-import { HttpError } from '@/lib/http'
+import { HttpError } from '@/lib/error.http'
 import { cookies } from 'next/headers'
 import { NextRequest } from 'next/server'
 
@@ -26,7 +26,7 @@ export async function GET(request: NextRequest) {
   try {
     const result = await productRequest.getGenarelProductsFromNextServerToServer(queryParams, userId, accessToken)
 
-    return Response.json(result.payload, { status: 200 })
+    return Response.json(result, { status: 200 })
   } catch (error: any) {
     if (error instanceof HttpError) {
       return Response.json(error.payload, {

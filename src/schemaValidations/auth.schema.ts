@@ -76,3 +76,14 @@ export type HandleRefreshTokenResType = z.infer<typeof handleRefreshTokenRes>
 
 const exchangeRes = loginRes
 export type ExchangeResType = z.TypeOf<typeof exchangeRes>
+
+const logoutRes = z.object({
+  message: z.string(),
+  status: z.string(),
+  reasonStatusCode: z.string(),
+  metaData: z.object({
+    deletecount: z.number()
+  })
+})
+
+export type LogoutResType = z.TypeOf<typeof logoutRes>
