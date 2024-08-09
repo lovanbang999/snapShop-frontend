@@ -170,7 +170,7 @@ export default function AddProductForm() {
         formData.append('sku-image', item.image as Blob)
 
         const result = await productRequest.uploadSkuImage(formData, userId)
-        const { url, publicId } = result.payload.metaData[0]
+        const { url, publicId } = result.metaData[0]
 
         return { url, publicId, originalItem: item }
       })
@@ -219,7 +219,7 @@ export default function AddProductForm() {
       const createProductResult = await productRequest.createProduct(finalData, userId)
       handleShowWhiteToast({
         title: 'Successfully',
-        message: createProductResult.payload.message
+        message: createProductResult.message
       })
 
       router.push('/dashboard/products')

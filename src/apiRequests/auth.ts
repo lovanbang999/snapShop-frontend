@@ -1,5 +1,5 @@
 import http from '@/lib/http'
-import { ExchangeResType, HandleRefreshTokenResType, LoginBodyType, LoginResType, SignUpBodyType, SignUpResType } from '@/schemaValidations/auth.schema'
+import { ExchangeResType, HandleRefreshTokenResType, LoginBodyType, LoginResType, LogoutResType, SignUpBodyType, SignUpResType } from '@/schemaValidations/auth.schema'
 import { MessageResType } from '@/schemaValidations/common.schema'
 
 export const authApiRequest = {
@@ -22,7 +22,7 @@ export const authApiRequest = {
     force?: boolean | undefined,
     signal?: AbortSignal | undefined
   ) =>
-    http.post<MessageResType>(
+    http.post<LogoutResType>(
       '/api/auth/logout',
       {
         force,
@@ -34,7 +34,7 @@ export const authApiRequest = {
       }
     ),
   logoutFormNextServerToServer: (userId: string, sessionToken: string) =>
-    http.post<MessageResType>(
+    http.post<LogoutResType>(
       '/logout',
       {},
       {

@@ -1,13 +1,12 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { Button } from './ui/button'
 import { authApiRequest } from '@/apiRequests/auth'
 import { handleErrorApi } from '@/lib/utils'
 import { useAppContext } from '@/app/AppProvider'
-import { toast } from './ui/use-toast'
+import { toast } from '../ui/use-toast'
 
-function ButtonLogout() {
+export default function DropdownMenuItemLogout() {
   const router = useRouter()
   const { user, setUser } = useAppContext()
 
@@ -30,10 +29,8 @@ function ButtonLogout() {
   }
 
   return (
-    <Button variant='secondary' className='bg-white text-main font-bold' onClick={handleLogout}>
+    <div onClick={handleLogout} className="w-full h-full">
       Logout
-    </Button>
+    </div>
   )
 }
-
-export default ButtonLogout

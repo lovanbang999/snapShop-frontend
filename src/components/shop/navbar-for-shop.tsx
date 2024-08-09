@@ -7,7 +7,7 @@ import {
   AccordionTrigger
 } from '@/components/ui/accordion'
 import clsx from 'clsx'
-import { BadgeHelpIcon, BarChart3Icon, NotebookPenIcon, ShoppingBag, StoreIcon } from 'lucide-react'
+import { BadgeHelpIcon, BarChart3Icon, HomeIcon, NotebookPenIcon, ShoppingBag, StoreIcon } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
@@ -37,6 +37,15 @@ export default function NavbarForShop() {
   return (
     <nav className="h-full max-h-full w-60 min-w-60 px-6 py-8">
       <Accordion type="single" collapsible>
+        <AccordionItem value="item-0" className="border-b-0">
+          <AccordionTrigger className="hover:no-underline">
+            <div className="flex items-center gap-4">
+              <HomeIcon />
+              Home
+            </div>
+          </AccordionTrigger>
+          <CustomAccordionContent href="/dashboard">Dashboard</CustomAccordionContent>
+        </AccordionItem>
         <AccordionItem value="item-1" className="border-b-0">
           <AccordionTrigger className="hover:no-underline">
             <div className="flex items-center gap-4">
