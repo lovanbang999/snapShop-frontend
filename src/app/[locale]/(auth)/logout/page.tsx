@@ -23,7 +23,7 @@ function LogoutLogic() {
         .logoutFormNextClientToNextServer(undefined, undefined, signal)
         .then((res: any) => {
           setUser(null)
-          router.push(`/login?redirectFrom=${pathname.split('/en')[1].toString()}`)
+          router.push(`/login?redirectFrom=${pathname.split('/').toSpliced(0, 2).join('/')}`)
           localStorage.removeItem('sessionToken')
           localStorage.removeItem('refreshToken')
         })
@@ -31,19 +31,18 @@ function LogoutLogic() {
       return () => {
         controller.abort()
       }
+    } else {
+      router.push('/')
     }
   }, [sessionToken, router, pathname, setUser])
 
   return <div>Logout Page</div>
 }
 
-
-function Page() {
+export default function Page() {
   return (
     <Suspense>
       <LogoutLogic />
     </Suspense>
   )
 }
-
-export default Page

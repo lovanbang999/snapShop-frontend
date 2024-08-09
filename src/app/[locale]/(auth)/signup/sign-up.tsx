@@ -20,13 +20,14 @@ import { authApiRequest } from '@/apiRequests/auth'
 import { handleErrorApi } from '@/lib/utils'
 import { useToast } from '@/components/ui/use-toast'
 import { useAppContext } from '@/app/AppProvider'
+import { useRouter } from 'next/navigation'
 
 interface showPassState {
   [key: string]: boolean;
 }
 
 function SinUpForm() {
-
+  const router = useRouter()
   const [showPass, setShowPass] = useState<showPassState>({})
   const [loading, setLoading] = useState(false)
   const { toast } = useToast()
@@ -56,18 +57,25 @@ function SinUpForm() {
 
     try {
       const result = await authApiRequest.signup(values)
+      const {
+        message,
+        metaData: {
+          tokens: { accessToken, refreshToken },
+          user: { _id: userId, email, username }
+        }
+      } = result
 
-      await authApiRequest.auth({ sessionToken: result.payload.metaData.tokens?.accessToken })
-
+      await authApiRequest.auth({ sessionToken: accessToken })
       toast({
-        description: result?.payload?.message
+        description: message
       })
 
-      const { _id: userId, email, username } = result?.payload?.metaData?.user
-
       setUser({ userId, email, username })
-      localStorage.setItem('refreshToken', result?.payload?.metaData?.tokens?.refreshToken)
+      localStorage.setItem('refreshToken', refreshToken)
+      localStorage.setItem('sessionToken', JSON.stringify(accessToken))
 
+      router.push('/')
+      router.refresh()
     } catch (error: any) {
       handleErrorApi({
         error,

@@ -53,18 +53,22 @@ export default function LogInForm() {
 
     try {
       const result = await authApiRequest.login(values)
+      const {
+        message,
+        metaData: {
+          tokens: { accessToken, refreshToken },
+          user: { _id: userId, email, username }
+        }
+      } = result
 
-      await authApiRequest.auth({ sessionToken: result?.payload?.metaData?.tokens?.accessToken })
-
+      await authApiRequest.auth({ sessionToken: accessToken })
       toast({
-        description: result?.payload?.message
+        description: message
       })
 
-      const { _id: userId, email, username } = result?.payload?.metaData?.user
-
       setUser({ userId, email, username })
-      localStorage.setItem('refreshToken', JSON.stringify(result?.payload?.metaData?.tokens?.refreshToken))
-      localStorage.setItem('sessionToken', JSON.stringify(result?.payload?.metaData?.tokens?.accessToken))
+      localStorage.setItem('refreshToken', JSON.stringify(refreshToken))
+      localStorage.setItem('sessionToken', JSON.stringify(accessToken))
 
       router.push('/')
       router.refresh()
