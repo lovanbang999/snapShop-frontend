@@ -30,6 +30,7 @@ import { compressImages, handleErrorApi, handleShowErrorToast, handleShowWhiteTo
 import { useAppContext } from '@/app/AppProvider'
 import { productRequest } from '@/apiRequests/product'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 interface UploadSkuResultType {
   url: string;
@@ -195,10 +196,22 @@ export default function AddProductForm() {
         return actual
       })
 
+      let minPrice = Infinity
+      let maxPrice = -Infinity
+      actualClassification.forEach(item => {
+        if (item.originalSellingPrice as number < minPrice) {
+          minPrice = item.originalSellingPrice as number
+        }
+        if (item.originalSellingPrice as number > maxPrice) {
+          maxPrice = item.originalSellingPrice as number
+        }
+      })
+
       const finalData = {
         ...productData,
         thumb: uploadedThumbResult.payload.metaData[0] ?? {},
         images: uploadedImageResult.payload.metaData ?? [],
+        price: `${minPrice} - ${maxPrice}`,
         convertionChartImage: uploadedConvertionChartResult.payload.metaData[0] ?? {},
         actualClassification: [...finalActualClassification]
       }
@@ -458,7 +471,7 @@ export default function AddProductForm() {
               <FormItem>
                 <FormLabel className='text-textColor'>Product description <span className="text-red-500">*</span></FormLabel>
                 <FormControl>
-                  <Textarea {...field} className="border-[1px] bg-[#F4F7FA] text-black rounded-sm min-h-32" />
+                  <Textarea {...field} className="border-[1px] bg-[#F4F7FA] text-black rounded-sm min-h-32 scrollbar-custom" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -469,8 +482,12 @@ export default function AddProductForm() {
 
         <ActualClassification />
 
-        <div className="flex w-full h-[100px] items-center justify-end rounded-md bg-white mt-10 px-10 gap-10">
-          <Button type="button" variant="outline" className="text-xl py-6 border-main text-main hover:text-main">Cancel</Button>
+        <div className="flex w-full h-[100px] items-center justify-end rounded-md bg-white mt-10 p-5 gap-10">
+          <Button type="button" variant="outline" className="text-xl py-6 border-main text-main hover:text-main">
+            <Link href="/dashboard/products">
+              Cancel
+            </Link>
+          </Button>
           <Button className="w-[141px] rounded-sm bg-main text-xl py-6 px-8 font-semibold" disabled={loading}>
             {loading ? <span className="loading loading-spinner loading-xs"></span> : 'Confirm'}
           </Button>

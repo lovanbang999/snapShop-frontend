@@ -35,7 +35,7 @@ function CustomAccordionContent({
 
 export default function NavbarForShop() {
   return (
-    <nav className="h-full max-h-full w-60 px-6 py-8">
+    <nav className="h-full max-h-full w-60 min-w-60 px-6 py-8">
       <Accordion type="single" collapsible>
         <AccordionItem value="item-1" className="border-b-0">
           <AccordionTrigger className="hover:no-underline">

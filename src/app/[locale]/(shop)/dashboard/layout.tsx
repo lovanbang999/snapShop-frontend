@@ -8,11 +8,11 @@ export default function DashBoardLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen w-screen">
       <Header />
-      <main className="flex flex-1 overflow-hidden">
+      <main className="flex flex-1 overflow-auto">
         <NavbarForShop />
-        <div className="flex justify-center w-full max-h-full bg-[#f5f5f5] overflow-y-auto scrollbar-custom">
+        <div className="w-[calc(100vw-240px)] max-w-[calc(100vw-240px)] max-h-full bg-[#f5f5f5]">
           {children}
         </div>
       </main>
