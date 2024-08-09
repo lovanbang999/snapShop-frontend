@@ -12,13 +12,13 @@ const intlMiddleware = createMiddleware({
   defaultLocale: 'en'
 })
 
-const privatePaths = ['/product']
+const privatePaths = ['/product', '/dashboard']
 const authPaths = ['/login', '/signup']
 
 // Combined config
 export const config = {
   // Match only internationalized pathnames and specific routes, excluding static assets
-  matcher: ['/((?!api|_next|.*\\..*).*)', '/product', '/login', '/signup']
+  matcher: ['/((?!api|_next|.*\\..*).*)', '/dashboard', '/product', '/login', '/signup']
 }
 
 function getPathnameWithoutLocale(pathname: string, locale: string): string {

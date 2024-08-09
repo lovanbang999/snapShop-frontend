@@ -11,7 +11,9 @@ import {
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
+  SelectLabel,
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select'
@@ -19,6 +21,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { ScrollArea } from '@radix-ui/react-scroll-area'
 import { Separator } from '@radix-ui/react-separator'
 import { BellIcon } from '@heroicons/react/24/outline'
+import { ChevronDownIcon } from 'lucide-react'
 
 const tags = Array.from({ length: 50 }).map(
   (_, i, a) => `v1.2.0-beta.${a.length - i}`
@@ -60,7 +63,7 @@ export default function Header() {
         {/* End breadcrumb */}
       </div>
 
-      <div className="flex items-center gap-20">
+      <div className="flex items-center gap-14">
         {/* Notificaton */}
         <div className="dropdown dropdown-end">
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
@@ -104,17 +107,27 @@ export default function Header() {
         </div>
         {/* End notification */}
 
+        {/* Change language */}
+        <Select>
+          <SelectTrigger className="w-fit focus:ring-0 border-none" icon={<ChevronDownIcon className='ml-2' />}>
+            <SelectValue placeholder="English" defaultValue='en' />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="en">English</SelectItem>
+            <SelectItem value="vi">Vietnamese</SelectItem>
+          </SelectContent>
+        </Select>
+        {/* End change language */}
+
+        {/* Avatar */}
         <div className="flex items-center gap-6">
           <div className="h-8 w-[1px] bg-black"></div>
-
-          {/* Avatar */}
           <Avatar>
             <AvatarImage src="https://github.com/shadcn.png" />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
-          {/* End avatar */}
         </div>
-
+        {/* End avatar */}
       </div>
     </header>
   )
