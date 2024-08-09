@@ -1,5 +1,5 @@
 import { authApiRequest } from '@/apiRequests/auth'
-import { HttpError } from '@/lib/http'
+import { HttpError } from '@/lib/error.http'
 import { cookies } from 'next/headers'
 
 export async function POST(request: Request) {
@@ -40,7 +40,7 @@ export async function POST(request: Request) {
   try {
     const result = await authApiRequest.logoutFormNextServerToServer( userId, sessionToken.value )
 
-    return Response.json(result.payload, {
+    return Response.json(result.message, {
       status: 200,
       headers: {
         'Set-Cookie': 'sessionToken=; Path=/; HttpOnly; Max-Age=0'

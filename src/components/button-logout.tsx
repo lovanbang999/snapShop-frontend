@@ -15,20 +15,17 @@ function ButtonLogout() {
   const handleLogout = async () => {
     try {
       const result = await authApiRequest.logoutFormNextClientToNextServer(user?.userId)
-
       toast({
-        description: result?.payload?.message
+        description: result.message
       })
 
       router.push('/login')
     } catch (error) {
-      handleErrorApi({
-        error
-      })
+      handleErrorApi({ error })
     } finally {
       setUser(null)
       localStorage.removeItem('sessionToken')
-      // localStorage.removeItem('refreshToken')
+      localStorage.removeItem('refreshToken')
       router.refresh()
     }
   }
