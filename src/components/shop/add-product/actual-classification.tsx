@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { PlusIcon, X } from 'lucide-react'
 import QicklyAddSku from './qickly-add-sku'
-import { useAddProductContext } from '../../../../components/shop/AddProductProvider'
+import { useAddProductContext } from '../AddProductProvider'
 import _ from 'lodash'
 import { formatPrice } from '@/lib/utils'
 

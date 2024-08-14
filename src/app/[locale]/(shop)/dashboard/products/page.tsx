@@ -2,8 +2,6 @@
 
 import { useEffect, useState } from 'react'
 import { productRequest } from '@/apiRequests/product'
-import ListProductForSale from '@/app/_components/shop/list-product-for-sale'
-import TabNavigationForShop from '@/app/_components/shop/tab-navigation-for-shop'
 import { useAppContext } from '@/app/AppProvider'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -12,6 +10,8 @@ import { ProductType } from '@/schemaValidations/product.schema'
 import { SearchIcon, SquarePlusIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
+import TabNavigationForShop from '@/components/shop/genaral-info-product/tab-navigation-for-shop'
+import ListProductForSale from '@/components/shop/genaral-info-product/list-product-for-sale'
 
 export default function Page() {
   const { user } = useAppContext()
