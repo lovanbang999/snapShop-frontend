@@ -5,19 +5,21 @@ import { useAppContext } from '@/app/AppProvider'
 import { toast } from '@/components/ui/use-toast'
 import { handleErrorApi } from '@/lib/utils'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 
 export default function Page() {
   const { setUser } = useAppContext()
   const router = useRouter()
   const searchParams = useSearchParams()
+  const apiCalledRef = useRef(false)
 
   useEffect(() => {
     const code = searchParams.get('code')
-    if (code) {
+    if (code && !apiCalledRef.current) {
       const fetchRequest = async (code: string) => {
         try {
-          const result = await authApiRequest.handleGoogleCallback(code)
+          apiCalledRef.current = true
+          const result = await authApiRequest.handleOAtuhCallback(code)
           const {
             message,
             metaData: {
@@ -36,6 +38,7 @@ export default function Page() {
           localStorage.setItem('refreshToken', JSON.stringify(refreshToken))
           localStorage.setItem('sessionToken', JSON.stringify(accessToken))
 
+          window.close()
           router.push('/')
           router.refresh()
         } catch (error) {

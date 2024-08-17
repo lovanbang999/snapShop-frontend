@@ -1,6 +1,5 @@
 import http from '@/lib/http'
 import { ExchangeResType, HandleRefreshTokenResType, LoginBodyType, LoginResType, LogoutResType, SignUpBodyType, SignUpResType } from '@/schemaValidations/auth.schema'
-import { MessageResType } from '@/schemaValidations/common.schema'
 
 export const authApiRequest = {
   login: (body: LoginBodyType) => http.post<LoginResType>('/login', body),
@@ -44,6 +43,6 @@ export const authApiRequest = {
         }
       }
     ),
-  handleGoogleCallback: (code: string) =>
+  handleOAtuhCallback: (code: string) =>
     http.post<ExchangeResType>('/auth/exchange', { code })
 }
