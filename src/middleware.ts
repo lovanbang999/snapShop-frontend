@@ -41,7 +41,7 @@ export async function middleware(request: NextRequest) {
   }
 
   if (authPaths.some(path => cleanPathname.startsWith(path)) && sessionToken) {
-    return NextResponse.redirect(new URL('/product', request.url))
+    return NextResponse.redirect(new URL('/', request.url))
   }
 
   return response

@@ -18,7 +18,7 @@ function ButtonLogout() {
         description: result.message
       })
 
-      router.push('/login')
+      window.location.replace('/login')
     } catch (error) {
       handleErrorApi({ error })
     } finally {

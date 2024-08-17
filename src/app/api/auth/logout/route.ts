@@ -39,6 +39,7 @@ export async function POST(request: Request) {
 
   try {
     const result = await authApiRequest.logoutFormNextServerToServer(userId, sessionToken.value)
+
     return Response.json(result, {
       status: 200,
       headers: {

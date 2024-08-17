@@ -8,6 +8,7 @@ import LogInForm from './login-form'
 import clsx from 'clsx'
 import { ModeToggle } from '@/components/toggle-theme'
 import { ChevronLeftIcon } from '@heroicons/react/16/solid'
+import { authApiRequest } from '@/apiRequests/auth'
 
 function Page() {
   const [click, setClick] = useState(false)
@@ -50,7 +51,7 @@ function Page() {
 
           <div className="flex gap-3 mt-4">
             <Button asChild variant="outline" size="icon" className="w-10 h-10 p-1">
-              <Link href='http://localhost:5000/v1/api/auth/google'>
+              <Link href="http://localhost:5000/v1/api/auth/google">
                 <Image
                   src="/icon-google-color.svg"
                   width={100}
@@ -61,13 +62,15 @@ function Page() {
               </Link>
             </Button>
             <Button variant="outline" size="icon" className="w-10 h-10 p-1">
-              <Image
-                src="/icon-facebook-color.svg"
-                width={100}
-                height={100}
-                alt="facebook icon"
-                className="justify-self-center"
-              />
+              <Link href="http://localhost:5000/v1/api/auth/facebook">
+                <Image
+                  src="/icon-facebook-color.svg"
+                  width={100}
+                  height={100}
+                  alt="facebook icon"
+                  className="justify-self-center"
+                />
+              </Link>
             </Button>
             <Button variant="outline" size="icon" className="w-10 h-10 p-1">
               <Image
