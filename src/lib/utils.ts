@@ -113,3 +113,14 @@ export const formatPrice = (value?: string) => {
   if (!value) return undefined
   return value.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 }
+
+export const formatCurrency = (value: string | number, currency: string = 'USD') => {
+  let price = typeof value === 'string' ? parseFloat(value) : value
+
+  const formatedPrice = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: currency
+  }).format(price)
+
+  return formatedPrice
+}

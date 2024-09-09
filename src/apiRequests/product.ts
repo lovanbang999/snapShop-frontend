@@ -13,7 +13,7 @@ export const productRequest = {
   createProduct: async (body: any, userId: string) =>
     http.post<UploadImageResType>('/product', body, { headers: { 'x-client-id': userId } }),
   getGenarelProductsFromClientToNextServer: async (queryParams: string, userId: string) =>
-    http.get<GetGenarelProductsResType>(`/api/shop/product/genarel-info-product?${queryParams}`, { baseUrl: '', headers: { 'x-client-id': userId } }),
+    http.get<GetGenarelProductsResType>(`/api/shop/product/general-info-product?${queryParams}`, { baseUrl: '', headers: { 'x-client-id': userId } }),
   getGenarelProductsFromNextServerToServer: async (queryParams: string, userId: string, authorization: string) =>
     http.get<GetGenarelProductsResType>(`/product${queryParams}`, { headers: { 'x-client-id': userId, Authorization:  `Bearer ${authorization}` } })
 }
