@@ -2,7 +2,7 @@ import { OBJECT_ID_RULE, OBJECT_ID_RULE_MESSAGE } from '@/lib/constant'
 import { z } from 'zod'
 
 export const addProductBody = z.object({
-  name: z.string().min(3, {
+  name: z.string().min(15, {
     message: 'Product name must be at least 6 characters'
   }).max(200, {
     message: 'Product name must be less than 200 characters'
@@ -76,29 +76,25 @@ const getGenarelProductsRes = z.object({
   message: z.string(),
   status: z.number(),
   reasonStatusCode: z.string(),
-  metaData: z.array(z.object({
-    _id: z.string(),
-    name: z.string(),
-    shopId: z.string(),
-    thumb: z.object({
-      publicId: z.string(),
-      url: z.string()
-    }),
-    price: z.string(),
-    createdAt: z.string()
-  }))
+  metaData: z.object({
+    result: z.array(z.object({
+      _id: z.string(),
+      name: z.string(),
+      thumb: z.object({
+        publicId: z.string(),
+        url: z.string()
+      }),
+      price: z.string(),
+      quantity: z.number(),
+      category: z.string(),
+      status: z.string(),
+      createdAt: z.string()
+    })),
+    totalPages: z.number(),
+    currentPage: z.number()
+  })
 })
 
 export type GetGenarelProductsResType = z.TypeOf<typeof getGenarelProductsRes>
 
-export interface ProductType {
-  _id: string;
-  name: string;
-  thumb: {
-    url: string;
-    publicId: string;
-  };
-  shopId: string;
-  price: string;
-  createdAt: string;
-}
+export type ProductType = GetGenarelProductsResType['metaData']['result']

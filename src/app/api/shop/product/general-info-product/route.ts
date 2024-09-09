@@ -39,6 +39,4 @@ export async function GET(request: NextRequest) {
       )
     }
   }
-
-  return Response.json('hehe')
 }

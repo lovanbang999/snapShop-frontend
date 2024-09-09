@@ -39,16 +39,13 @@ interface UploadSkuResultType {
 }
 
 interface UploadedImageResultType {
+  message: string;
   status: number;
-  payload: {
-      message: string;
-      status: number;
-      reasonStatusCode: string;
-      metaData: {
-          url: string;
-          publicId: string;
-      }[];
-  };
+  reasonStatusCode: string;
+  metaData: {
+      url: string;
+      publicId: string;
+  }[];
 }
 
 export default function AddProductForm() {
@@ -209,10 +206,10 @@ export default function AddProductForm() {
 
       const finalData = {
         ...productData,
-        thumb: uploadedThumbResult.payload.metaData[0] ?? {},
-        images: uploadedImageResult.payload.metaData ?? [],
+        thumb: uploadedThumbResult.metaData[0] ?? {},
+        images: uploadedImageResult.metaData ?? [],
         price: `${minPrice} - ${maxPrice}`,
-        convertionChartImage: uploadedConvertionChartResult.payload.metaData[0] ?? {},
+        convertionChartImage: uploadedConvertionChartResult.metaData[0] ?? {},
         actualClassification: [...finalActualClassification]
       }
 
