@@ -1,40 +1,45 @@
 'use client'
 
-import * as React from 'react'
-import { Moon, Sun } from 'lucide-react'
+import { useState } from 'react'
+import { MoonIcon, SunIcon } from 'lucide-react'
 import { useTheme } from 'next-themes'
+import clsx from 'clsx'
 
-import { Button } from '@/components/ui/button'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger
-} from '@/components/ui/dropdown-menu'
-
-export function ModeToggle() {
+export function ModeToggle({
+  bgColor = 'default'
+}: {
+  bgColor?: 'default' | 'white'
+}) {
   const { setTheme } = useTheme()
+  const [isLight, setIsLight] = useState<boolean>(true)
+
+  const handleToggleTheme = () => {
+    if (isLight) {
+      setTheme('dark')
+      setIsLight(false)
+    } else {
+      setTheme('light')
+      setIsLight(true)
+    }
+  }
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant='outline' size='icon' className='outline-none focus-visible:ring-0'>
-          <Sun className='h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0' />
-          <Moon className='absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100' />
-          <span className='sr-only'>Toggle theme</span>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align='end'>
-        <DropdownMenuItem onClick={() => setTheme('light')}>
-          Light
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('dark')}>
-          Dark
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('system')}>
-          System
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <div
+      className={clsx('flex bg-[#1A8B9F1A] rounded-full px-2 py-1 gap-2 cursor-pointer', {
+        'bg-[#F4F7FAE8]': bgColor === 'white'
+      })}
+      onClick={handleToggleTheme}
+    >
+      <div className={clsx('rounded-full text-gray-500 p-1', {
+        'text-main bg-white': isLight
+      })}>
+        <SunIcon className="w-4 h-4" />
+      </div>
+      <div className={clsx('rounded-full text-gray-500 p-1', {
+        'text-main bg-white': !isLight
+      })}>
+        <MoonIcon className="w-4 h-4" />
+      </div>
+    </div>
   )
 }

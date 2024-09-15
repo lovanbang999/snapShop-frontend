@@ -3,10 +3,10 @@ import HeaderForUserMobile from './header-for-user-mobile'
 
 function HeaderForUser() {
   return (
-    <div>
+    <>
       <HeaderForUserMobile />
       <HeaderForUserLargeDevice />
-    </div>
+    </>
   )
 }
 

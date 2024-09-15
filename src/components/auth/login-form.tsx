@@ -1,10 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import Link from 'next/link'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
-import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
@@ -13,6 +9,10 @@ import {
   FormLabel,
   FormMessage
 } from '@/components/ui/form'
+import Link from 'next/link'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Checkbox } from '@/components/ui/checkbox'
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline'
@@ -133,7 +133,7 @@ export default function LogInForm() {
         </div>
 
         {loading ? (
-          <Button className="w-32 self-center bg-main rounded-xl text-lg font-semibold" disabled>
+          <Button className="w-full md:w-32 self-center bg-main rounded-sm md:rounded-xl text-lg font-semibold" disabled>
             <span className="loading loading-spinner loading-xs"></span>
           </Button>
         ) : (

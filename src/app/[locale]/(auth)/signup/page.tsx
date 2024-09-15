@@ -7,7 +7,7 @@ import Link from 'next/link'
 import clsx from 'clsx'
 import { ModeToggle } from '@/components/toggle-theme'
 import { ChevronLeftIcon } from '@heroicons/react/16/solid'
-import SinUpForm from './sign-up'
+import SinUpForm from '@/components/auth/signup-form'
 
 function Page() {
   const [click, setClick] = useState(false)
@@ -20,15 +20,11 @@ function Page() {
           Home
         </Button>
       </Link>
-
       <div className="flex w-[770px] h-fit bg-third md:bg-light-dark rounded-xl">
-
         {/* Form */}
         <div className="flex flex-1 flex-col items-center py-8 px-6">
           <h2 className="text-3xl font-bold text-black">SignUp</h2>
-
           <SinUpForm />
-
           <div className="flex items-center md:hidden mt-4">
             <p className="text-textColor">Do you already have an account?</p>
             <Link href='/login' passHref className="link ml-2 text-main">
@@ -52,14 +48,12 @@ function Page() {
             <p className="text-lg">You don&apos;t have an account yet?</p>
             <p className="text-white text-center">Enjoy an easy shopping experience in just a few steps</p>
           </div>
-
           <Button variant="outline" className="text-white bg-transparent" onClick={() => setClick(!click)} asChild>
             <Link href='/login'>Login</Link>
           </Button>
         </div>
       </div>
-
-      <div className='absolute top-1 right-1'>
+      <div className='absolute top-1 right-1 p-2'>
         <ModeToggle />
       </div>
     </div>

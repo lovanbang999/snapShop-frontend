@@ -155,7 +155,7 @@ function SinUpForm() {
 
 
         {loading ? (
-          <Button className="w-32 self-center bg-main rounded-xl text-lg font-semibold" disabled>
+          <Button className="w-full md:w-32 self-center bg-main rounded-sm md:rounded-xl text-lg font-semibold" disabled>
             <span className="loading loading-spinner loading-xs"></span>
           </Button>
         ) : (
