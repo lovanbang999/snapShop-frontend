@@ -1,15 +1,15 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
+import { useAppContext } from '@/app/AppProvider'
 import { Button } from './ui/button'
 import { authApiRequest } from '@/apiRequests/auth'
-import { handleErrorApi } from '@/lib/utils'
-import { useAppContext } from '@/app/AppProvider'
 import { toast } from './ui/use-toast'
+import { handleErrorApi } from '@/lib/utils'
+import { useRouter } from 'next/navigation'
 
-function ButtonLogout() {
-  const router = useRouter()
+export default function ButtonLogout() {
   const { user, setUser } = useAppContext()
+  const router = useRouter()
 
   const handleLogout = async () => {
     try {
@@ -35,5 +35,3 @@ function ButtonLogout() {
     </Button>
   )
 }
-
-export default ButtonLogout

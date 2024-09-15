@@ -4,9 +4,9 @@ import { BellIcon, MagnifyingGlassIcon, ShoppingCartIcon } from '@heroicons/reac
 import Link from 'next/link'
 import { Separator } from './ui/separator'
 import { ScrollArea } from './ui/scroll-area'
-import ButtonLogout from './button-logout'
 import { cookies } from 'next/headers'
 import { ModeToggle } from './toggle-theme'
+import MenuAvatar from './menu-avatar'
 
 const tags = Array.from({ length: 50 }).map(
   (_, i, a) => `v1.2.0-beta.${a.length - i}`
@@ -44,7 +44,7 @@ function HeaderForUserLargeDevice() {
         </div>
 
         {/* Toggle mode */}
-        <ModeToggle />
+        <ModeToggle bgColor="white" />
 
         {/* Action */}
         <div className="flex-none gap-5 ml-3 lg:gap-10">
@@ -135,7 +135,7 @@ function HeaderForUserLargeDevice() {
 
           {/* Login btn */}
           {sessionToken ? (
-            <ButtonLogout />
+            <MenuAvatar />
           ):
             (<Link href="/login" className='px-4'>
               <Button variant='secondary' className='bg-white text-main font-bold'>

@@ -14,7 +14,6 @@ const tags = Array.from({ length: 50 }).map(
 
 function HeaderForUserMobile() {
   const tag = 0
-
   const cookieStore = cookies()
   const sessionToken = cookieStore.get('sessionToken')?.value
 
@@ -47,7 +46,7 @@ function HeaderForUserMobile() {
                       <div>
                         <ButtonLogout />
                       </div>
-                    ): (
+                    ) : (
                       <div>
                         <Link href="/login" className="text-xl font-semibold">Login</Link>
                         <p className="text-base">Login to receive more offerss</p>
@@ -56,6 +55,9 @@ function HeaderForUserMobile() {
                   </div>
                   <ul className="p-4">
                     <li><a>Notification</a></li>
+                    <li><a>Profile</a></li>
+                    <li><a>Setting</a></li>
+                    <li><a>Support</a></li>
                   </ul>
                 </div>
               </div>
@@ -121,9 +123,9 @@ function HeaderForUserMobile() {
 
         {/* Search */}
         <div className="flex items-center w-[320px] h-[40%] bg-white rounded-sm">
-          <input type="text" placeholder="Search product here..." className="flex-1 h-full pl-2 bg-transparent text-main border-none outline-none placeholder:text-main"/>
+          <input type="text" placeholder="Search product here..." className="flex-1 h-full pl-2 bg-transparent text-main border-none outline-none placeholder:text-main" />
           <Button variant="ghost">
-            <MagnifyingGlassIcon className='w-6 h-6 text-main'/>
+            <MagnifyingGlassIcon className='w-6 h-6 text-main' />
           </Button>
         </div>
 

@@ -30,6 +30,7 @@ import { Separator } from '@radix-ui/react-separator'
 import { BellIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from 'lucide-react'
 import DropdownMenuItemLogout from './drop-down-item-logout'
+import { ModeToggle } from '../toggle-theme'
 
 const tags = Array.from({ length: 50 }).map(
   (_, i, a) => `v1.2.0-beta.${a.length - i}`
@@ -113,6 +114,8 @@ export default function Header() {
           </div>
         </div>
         {/* End notification */}
+
+        <ModeToggle />
 
         {/* Change language */}
         <Select>

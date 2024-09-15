@@ -1,14 +1,12 @@
 'use client'
-
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 import Link from 'next/link'
-import LogInForm from './login-form'
 import clsx from 'clsx'
 import { ModeToggle } from '@/components/toggle-theme'
 import { ChevronLeftIcon } from '@heroicons/react/16/solid'
-import { authApiRequest } from '@/apiRequests/auth'
+import LogInForm from '@/components/auth/login-form'
 
 function Page() {
   const [click, setClick] = useState(false)
@@ -23,7 +21,6 @@ function Page() {
       </Link>
 
       <div className="flex w-[770px] h-[490px] bg-third md:bg-light-dark rounded-xl">
-
         {/* Nav to signup */}
         <div className={clsx('hidden md:flex flex-col items-center justify-between w-6/12 h-full px-4 py-8 bg-main rounded-l-xl rounded-r-3xl z-10', {
           'translate-x-full duration-200 ease-linear': click
@@ -48,7 +45,6 @@ function Page() {
         {/* Form */}
         <div className="flex flex-1 flex-col items-center py-8 px-6">
           <h2 className="text-3xl font-bold text-black">LogIn</h2>
-
           <div className="flex gap-3 mt-4">
             <Button asChild variant="outline" size="icon" className="w-10 h-10 p-1">
               <Link href="http://localhost:5000/v1/api/auth/google">
@@ -82,7 +78,6 @@ function Page() {
               />
             </Button>
           </div>
-
           <p className="my-4 text-black">Or log in with username and password</p>
 
           <LogInForm />
@@ -95,8 +90,7 @@ function Page() {
           </div>
         </div>
       </div>
-
-      <div className="absolute top-1 right-1">
+      <div className="absolute top-1 right-1 p-2">
         <ModeToggle />
       </div>
     </div>
