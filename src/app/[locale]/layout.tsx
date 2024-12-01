@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
 import './globals.css'
+import 'react-quill/dist/quill.snow.css'
 import AppProvider from '../AppProvider'
 import { Toaster } from '@/components/ui/toaster'
 import HandleRefreshToken from '@/components/handle-refresh-token'
@@ -26,7 +27,6 @@ export default async function RootLayout({
   const messages = await getMessages()
 
   return (
-
     <html suppressHydrationWarning={true} lang={locale}>
       <body suppressHydrationWarning={true} className={inter.className}>
         <ThemeProvider

@@ -26,7 +26,7 @@ const nextConfig = {
         pathname: '/**',
       },
     ],
-  }
+  },
 }
 
 export default withNextIntl(nextConfig)

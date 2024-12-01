@@ -23,7 +23,6 @@
     --text: 0 0% 0%;
     /* End custom */
 
-
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
 
@@ -164,4 +163,16 @@
 
 .scrollbar-custom::-webkit-scrollbar-thumb:hover {
   background-color: #555;
+}
+
+.ql-toolbar {
+  @apply rounded-tl-md rounded-tr-md
+}
+
+.ql-container {
+  @apply rounded-bl-md rounded-br-md
+}
+
+.ql-editor {
+  @apply min-h-[140px]
 }
