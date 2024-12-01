@@ -17,8 +17,6 @@ import UserDescription from '@/components/shop/add-product/user-description'
 export default function AddProductPage() {
   const { isLoading, uploadedImages, productName, description } = useAddProductContext()
 
-  console.log(description)
-
   return (
     <>
       {isLoading ? (
