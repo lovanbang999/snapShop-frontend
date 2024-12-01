@@ -109,9 +109,8 @@ export const compressImage = async (
   }
 ): Promise<File> => await imageCompression(images, options)
 
-export const formatPrice = (value?: string) => {
-  if (!value) return undefined
-  return value.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+export const formatPrice = (value: string) => {
+  return value.replace(/\B(?=(\d{3})+(?!\d))/g, '.')
 }
 
 export const formatCurrency = (value: string | number, currency: string = 'USD') => {
