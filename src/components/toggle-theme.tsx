@@ -3,42 +3,34 @@
 import { useState } from 'react'
 import { MoonIcon, SunIcon } from 'lucide-react'
 import { useTheme } from 'next-themes'
-import clsx from 'clsx'
 
-export function ModeToggle({
-  bgColor = 'default'
-}: {
-  bgColor?: 'default' | 'white'
-}) {
+export default function ModeToggle() {
   const { setTheme } = useTheme()
-  const [isLight, setIsLight] = useState<boolean>(true)
+  const [isDarkMode, setIsDarkMode] = useState(false)
 
-  const handleToggleTheme = () => {
-    if (isLight) {
-      setTheme('dark')
-      setIsLight(false)
-    } else {
-      setTheme('light')
-      setIsLight(true)
-    }
+  const handleToggle = () => {
+    setIsDarkMode(prev => !prev)
+
+    setTimeout(() => {
+      setTheme(isDarkMode ? 'light' : 'dark')
+    }, 300)
   }
 
   return (
     <div
-      className={clsx('flex bg-[#1A8B9F1A] rounded-full px-2 py-1 gap-2 cursor-pointer', {
-        'bg-[#F4F7FAE8]': bgColor === 'white'
-      })}
-      onClick={handleToggleTheme}
+      className={`flex items-center w-16 h-8 p-1 bg-gray-200 rounded-full cursor-pointer transition-colors duration-300 ${isDarkMode ? 'bg-gray-700' : 'bg-gray-200'
+      }`}
+      onClick={handleToggle}
     >
-      <div className={clsx('rounded-full text-gray-500 p-1', {
-        'text-main bg-white': isLight
-      })}>
-        <SunIcon className="w-4 h-4" />
-      </div>
-      <div className={clsx('rounded-full text-gray-500 p-1', {
-        'text-main bg-white': !isLight
-      })}>
-        <MoonIcon className="w-4 h-4" />
+      <div
+        className={`w-6 h-6 bg-white rounded-full shadow-md flex items-center justify-center transform transition-transform duration-300 ${isDarkMode ? 'translate-x-8' : ''
+        }`}
+      >
+        {isDarkMode ? (
+          <SunIcon className="w-4 h-4 text-black" />
+        ) : (
+          <MoonIcon className="w-4 h-4 text-black" />
+        )}
       </div>
     </div>
   )

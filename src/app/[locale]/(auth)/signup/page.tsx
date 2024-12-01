@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 import Link from 'next/link'
 import clsx from 'clsx'
-import { ModeToggle } from '@/components/toggle-theme'
+import ModeToggle from '@/components/toggle-theme'
 import { ChevronLeftIcon } from '@heroicons/react/16/solid'
 import SinUpForm from '@/components/auth/signup-form'
 

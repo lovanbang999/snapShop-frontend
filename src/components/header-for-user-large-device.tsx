@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { Separator } from './ui/separator'
 import { ScrollArea } from './ui/scroll-area'
 import { cookies } from 'next/headers'
-import { ModeToggle } from './toggle-theme'
+import ModeToggle from './toggle-theme'
 import MenuAvatar from './menu-avatar'
 
 const tags = Array.from({ length: 50 }).map(
@@ -44,7 +44,7 @@ function HeaderForUserLargeDevice() {
         </div>
 
         {/* Toggle mode */}
-        <ModeToggle bgColor="white" />
+        <ModeToggle />
 
         {/* Action */}
         <div className="flex-none gap-5 ml-3 lg:gap-10">
